@@ -1,0 +1,25 @@
+.noteInput {
+  margin: 20px auto;
+  max-width: 500px;
+  border: 2px solid var(--primary-color);
+  padding: 20px;
+  border-radius: 10px;
+}
+.noteInput input,
+.noteInput textarea {
+  display: block;
+  width: 100%;
+}
+.title {
+  font-weight: bold;
+}
+
+.charLimit {
+  font-size: 14px;
+  text-align: right;
+  color: var(--primary-color);
+}
+
+.body {
+  min-height: 175px;
+}
