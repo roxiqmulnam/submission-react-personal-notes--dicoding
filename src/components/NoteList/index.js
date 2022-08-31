@@ -1,23 +1,25 @@
 import React from "react";
-import { NoteItem } from "..";
+import { NoteItem } from "../index";
+import styles from "./NoteList.module.css";
+
 const NotesList = ({
   notes,
   searchInput,
-  resultBySearch,
+  searchKeywords,
   handleDelete,
-  handleArsip,
-  headingTwo,
+  handleArchive,
+  listTitle,
   conditionArchived,
 }) => {
   return (
     <>
-      <h2>{headingTwo}</h2>
+      <h2>{listTitle}</h2>
       {notes.length === 0 ||
       notes.filter((value) => value.archived === conditionArchived).length ===
         0 ? (
-        <p>Tidak ada catatan</p>
+        <p>Empty</p>
       ) : (
-        <div className="notes-list">
+        <div className={styles["notes-list"]}>
           {searchInput.length === 0
             ? notes.map((note) => {
                 return (
@@ -26,19 +28,19 @@ const NotesList = ({
                       key={note.id}
                       note={note}
                       handleDelete={handleDelete}
-                      handleArsip={handleArsip}
+                      handleArchive={handleArchive}
                     />
                   )
                 );
               })
-            : resultBySearch.map((note) => {
+            : searchKeywords.map((note) => {
                 return (
                   note.archived === conditionArchived && (
                     <NoteItem
                       key={note.id}
                       note={note}
                       handleDelete={handleDelete}
-                      handleArsip={handleArsip}
+                      handleArchive={handleArchive}
                     />
                   )
                 );

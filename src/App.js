@@ -7,27 +7,39 @@ import Swal from "sweetalert2";
 function App() {
   const [notes, setNotes] = useState(getInitialData());
   const [inputTitle, setInputTitle] = useState("");
-  const [inputBody, setInputBody] = useState("");
+  const [createNote, setCreateNote] = useState("");
   const [searchInput, setSearchInput] = useState("");
-  const [limit, setLimit] = useState(50);
+  const [limitTitle, setLimitTitle] = useState(0);
 
-  const resultBySearch = notes.filter((note) => {
+  const searchKeywords = notes.filter((note) => {
     const noteTitle = note.title.toLowerCase();
     const searchKeyword = searchInput.toLowerCase();
     return noteTitle.includes(searchKeyword);
   });
 
-  function handleChange(e) {
-    if (e.target.value.length > 50) {
-      setLimit(0);
-    } else {
-      setInputTitle(e.target.value);
-      setLimit(50 - e.target.value.length);
-    }
-  }
+  const handleChange = (event) => {
+    if (event.target.value.length < 50) setInputTitle(event.target.value);
+    setLimitTitle(0 + event.target.value.length);
+  };
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const AddNewNote = [
+      {
+        id: +new Date(),
+        title: inputTitle,
+        body: createNote,
+        createdAt: new Date().toISOString(),
+        archived: false,
+      },
+      ...notes,
+    ];
+
+    setNotes(AddNewNote);
+    setInputTitle("");
+    setCreateNote("");
+    setLimitTitle(0);
+
     Swal.fire({
       icon: "success",
       text: "Your note has been Added",
@@ -35,23 +47,9 @@ function App() {
       confirmButtonColor: "#f58840",
       timer: 2000,
     });
-    const addedNote = [
-      {
-        id: +new Date(),
-        title: inputTitle,
-        body: inputBody,
-        createdAt: new Date().toISOString(),
-        archived: false,
-      },
-      ...notes,
-    ];
-    setNotes(addedNote);
-    setInputTitle("");
-    setInputBody("");
-    setLimit(50);
-  }
+  };
 
-  function handleDelete(id) {
+  const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
       icon: "warning",
@@ -61,12 +59,12 @@ function App() {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        const newNotes = [...notes];
-        const index = newNotes.findIndex((object) => {
+        const listNotes = [...notes];
+        const indexById = listNotes.findIndex((object) => {
           return object.id === id;
         });
-        newNotes.splice(index, 1);
-        setNotes(newNotes);
+        listNotes.splice(indexById, 1);
+        setNotes(listNotes);
 
         Swal.fire({
           text: "Your note has been deleted!",
@@ -74,18 +72,16 @@ function App() {
         });
       }
     });
-  }
+  };
 
-  function handleArsip(id) {
-    
-    const newNotes = [...notes];
-    const index = newNotes.findIndex((object) => {
+  const handleArchive = (id) => {
+    const listNotes = [...notes];
+    const indexById = listNotes.findIndex((object) => {
       return object.id === id;
     });
 
-    newNotes[index].archived = !newNotes[index].archived;
-    setNotes(newNotes);
-    
+    listNotes[indexById].archived = !listNotes[indexById].archived;
+    setNotes(listNotes);
   }
 
   return (
@@ -97,16 +93,16 @@ function App() {
 
       <NoteBody
         handleSubmit={handleSubmit}
-        limit={limit}
-        inputTitle={inputTitle}
         handleChange={handleChange}
-        inputBody={inputBody}
-        onChange={(e) => setInputBody(e.target.value)}
-        notes={notes}
-        searchInput={searchInput}
-        resultBySearch={resultBySearch}
         handleDelete={handleDelete}
-        handleArsip={handleArsip}
+        handleArchive={handleArchive}
+        notes={notes}
+        onChange={(e) => setCreateNote(e.target.value)}
+        inputTitle={inputTitle}
+        createNote={createNote}
+        limitTitle={limitTitle}
+        searchKeywords={searchKeywords}
+        searchInput={searchInput}
       />
     </>
   );

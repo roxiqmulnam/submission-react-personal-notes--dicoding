@@ -1,45 +1,48 @@
+import React from "react";
 import { NoteFormInput, NotesList } from "../index";
+import styles from "./NoteBody.module.css";
+
 const NoteBody = ({
   handleSubmit,
-  limit,
+  limitTitle,
   inputTitle,
   handleChange,
-  inputBody,
+  createNote,
   onChange,
   notes,
   searchInput,
-  resultBySearch,
+  searchKeywords,
   handleDelete,
-  handleArsip,
+  handleArchive,
 }) => {
   return (
-    <div className="note-app__body">
+    <div className={styles.body}>
       <NoteFormInput
-        handleSubmit={handleSubmit}
-        limit={limit}
+        limitTitle={limitTitle}
         inputTitle={inputTitle}
+        createNote={createNote}
+        handleSubmit={handleSubmit}
         handleChange={handleChange}
-        inputBody={inputBody}
         onChange={onChange}
       />
 
       <NotesList
+        listTitle="All Notes"
         notes={notes}
         searchInput={searchInput}
-        resultBySearch={resultBySearch}
+        searchKeywords={searchKeywords}
         handleDelete={handleDelete}
-        handleArsip={handleArsip}
-        headingTwo="All Notes"
+        handleArchive={handleArchive}
         conditionArchived={false}
       />
 
       <NotesList
+        listTitle="Archives"
         notes={notes}
         searchInput={searchInput}
-        resultBySearch={resultBySearch}
+        searchKeywords={searchKeywords}
         handleDelete={handleDelete}
-        handleArsip={handleArsip}
-        headingTwo="Archive Notes"
+        handleArchive={handleArchive}
         conditionArchived={true}
       />
     </div>

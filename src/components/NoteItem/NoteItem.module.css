@@ -1,0 +1,57 @@
+.items {
+    border: 2px solid var(--primary-color);
+    border-bottom: none;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .item {
+    padding: 12px;
+    flex: 1 1;
+  }
+  
+  .title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-bottom: 4px;
+    color: var(--primary-color);
+  }
+  
+  .date {
+    font-size: 12px;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+  }
+  
+  .body {
+    font-size: 14px;
+    color: var(--third-color);
+  }
+  
+  .action {
+    display: flex;
+  }
+  
+  .delete-button,
+  .archive-button {
+    display: block;
+    width: 100%;
+    background-color: transparent;
+    border: 0;
+    padding: 8px 0;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .delete-button {
+    color: var(--secondary-color);
+    background-color: var(--fourth-color);
+  }
+  
+  .archive-button {
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+  }

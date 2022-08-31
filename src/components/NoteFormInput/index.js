@@ -1,28 +1,22 @@
-import styles from "./index.module.css";
-const NoteFormInput = ({
-  handleSubmit,
-  limit,
-  inputTitle,
-  handleChange,
-  inputBody,
-  onChange,
-}) => {
+import React from "react";
+import styles from "./NoteInput.module.css";
+const NoteFormInput = ({ handleSubmit, limitTitle, inputTitle, handleChange, createNote, onChange }) => {
   return (
-    <div className={styles.noteInput}>
+    <div className={styles["note-input"]}>
       <h2>Add Notes</h2>
       <form action="#" onSubmit={handleSubmit}>
-        <p className={styles.charLimit}>Max length title: {limit} / 50</p>
+        <p className={styles["char-limit"]}>{limitTitle} / 50</p>
         <input
+          className={styles.title}
           value={inputTitle}
           onChange={handleChange}
           type="text"
-          className={styles.title}
           placeholder="Title ..."
           required
         />
         <textarea
-          className={styles.body}
-          value={inputBody}
+          className={styles['create-note']}
+          value={createNote}
           onChange={onChange}
           type="text"
           placeholder="Creata a Note ...."

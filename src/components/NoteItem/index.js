@@ -1,23 +1,25 @@
+import React from "react";
 import { showFormattedDate } from "../../utils/index";
+import styles from './NoteItem.module.css'
 
-const NoteItem = ({ note, handleDelete, handleArsip }) => {
+const NoteItem = ({ note, handleDelete, handleArchive }) => {
   return (
-    <div className="note-item">
-      <div className="note-item__content">
-        <h3 className="note-item__title">{note.title}</h3>
-        <p className="note-item__date">{showFormattedDate(note.createdAt)}</p>
-        <p className="note-item__body">{note.body}</p>
+    <div className={styles.items}>
+      <div className={styles.item}>
+        <h3 className={styles.title}>{note.title}</h3>
+        <p className={styles.date}>{showFormattedDate(note.createdAt)}</p>
+        <p className={styles.body}>{note.body}</p>
       </div>
-      <div className="note-item__action">
+      <div className={styles.action}>
         <button
           onClick={() => handleDelete(note.id)}
-          className="note-item__delete-button"
+          className={styles['delete-button']}
         >
           Delete
         </button>
         <button
-          onClick={() => handleArsip(note.id)}
-          className="note-item__archive-button"
+          onClick={() => handleArchive(note.id)}
+          className={styles['archive-button']}
         >
           {note.archived ? "Move Note" : "Archive Note"}
         </button>

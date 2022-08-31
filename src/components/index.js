@@ -1,7 +1,6 @@
 import Navbar from "./Navbar";
-// import NoteFormInput from "./NoteFormInput";
-import NoteFormInput from "./NoteInput";
-import NotesList from "./NotesList";
+import NoteFormInput from "./NoteFormInput";
+import NotesList from "./NoteList";
 import NoteItem from "./NoteItem";
 import NoteBody from "./NoteBody";
 
