@@ -24,13 +24,14 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    
     const AddNewNote = [
       {
         id: +new Date(),
         title: inputTitle,
         body: createNote,
-        createdAt: new Date().toISOString(),
         archived: false,
+        createdAt: new Date().toISOString(),
       },
       ...notes,
     ];

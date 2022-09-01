@@ -17,34 +17,39 @@ const NotesList = ({
       {notes.length === 0 ||
       notes.filter((value) => value.archived === conditionArchived).length ===
         0 ? (
-        <p>Empty</p>
+        <h3>Empty Data</h3>
       ) : (
         <div className={styles["notes-list"]}>
-          {searchInput.length === 0
-            ? notes.map((note) => {
-                return (
-                  note.archived === conditionArchived && (
-                    <NoteItem
-                      key={note.id}
-                      note={note}
-                      handleDelete={handleDelete}
-                      handleArchive={handleArchive}
-                    />
-                  )
-                );
-              })
-            : searchKeywords.map((note) => {
-                return (
-                  note.archived === conditionArchived && (
-                    <NoteItem
-                      key={note.id}
-                      note={note}
-                      handleDelete={handleDelete}
-                      handleArchive={handleArchive}
-                    />
-                  )
-                );
-              })}
+          {searchInput === '' ? (
+            notes.map((note) => {
+              return (
+                note.archived === conditionArchived && (
+                  <NoteItem
+                    key={note.id}
+                    note={note}
+                    handleDelete={handleDelete}
+                    handleArchive={handleArchive}
+                  />
+                )
+              );
+            })
+          ) : searchKeywords.filter((value) => value.archived === conditionArchived)
+              .length === 0 ? (
+            <h3>Data is not found</h3>
+          ) : (
+            searchKeywords.map((note) => {
+              return (
+                note.archived === conditionArchived && (
+                  <NoteItem
+                    key={note.id}
+                    note={note}
+                    handleDelete={handleDelete}
+                    handleArchive={handleArchive}
+                  />
+                )
+              );
+            })
+          )}
         </div>
       )}
     </>
